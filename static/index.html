@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Publication Search</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            padding: 30px;
+            background: #f8f9fa;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .search-form {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .search-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-section {
+            padding: 30px;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .metric-card h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .metric-card p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .filter-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-section h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .year-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .year-button {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .year-button:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .year-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .publications-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .publication-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .publication-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .publication-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .publication-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .publication-year {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .publication-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+        }
+
+        .meta-item strong {
+            color: #333;
+        }
+
+        .publication-venue {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .publication-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .source-badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .source-crossref {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .source-openalex {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .source-google {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .publication-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .publication-link:hover {
+            text-decoration: underline;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+        }
+
+        .no-results h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .download-button {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .download-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .filter-header h3 {
+            margin: 0;
+        }
+
+        .author-info-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .author-info-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .author-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .author-detail-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .author-detail-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .author-detail-item .value {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .interest-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Academic Publication Search</h1>
+            <p>Search for academic publications using multiple sources</p>
+        </div>
+
+        <div class="search-section">
+            <div class="search-tabs">
+                <button class="tab-button active" onclick="switchTab('normal')">
+                    🔍 Normal Search (Name & Email)
+                </button>
+                <button class="tab-button" onclick="switchTab('advanced')">
+                    🎓 Advanced Search (Author ID)
+                </button>
+            </div>
+
+            <form id="normalForm" class="search-form active" onsubmit="searchNormal(event)">
+                <div class="form-group">
+                    <label>Author Name *</label>
+                    <input type="text" id="authorName" placeholder="e.g., Subhalaxmi Chakraborty" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="authorEmail" placeholder="e.g., author@university.edu" required>
+                </div>
+                <button type="submit" class="search-button">Search Publications</button>
+            </form>
+
+            <form id="advancedForm" class="search-form" onsubmit="searchAdvanced(event)">
+                <div class="form-group">
+                    <label>Google Scholar Author ID *</label>
+                    <input type="text" id="authorId" placeholder="e.g., VUlo65MAAAAJ" required>
+                </div>
+                <div class="form-group">
+                    <label>Author Name (Optional)</label>
+                    <input type="text" id="advancedAuthorName" placeholder="e.g., Subhalaxmi Chakraborty">
+                </div>
+                <button type="submit" class="search-button">Search Publications</button>
+            </form>
+        </div>
+
+        <div class="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 20px; color: #666;">Searching publications...</p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <div class="results-section" id="resultsSection">
+            <div id="authorInfoSection"></div>
+            <div class="metrics-grid" id="metricsGrid"></div>
+            
+            <div class="filter-section">
+                <div class="filter-header">
+                    <h3>📅 Filter by Year</h3>
+                    <button class="download-button" id="downloadBtnAdvanced" onclick="downloadCSV()" style="display: none;">
+                        📥 Download CSV
+                    </button>
+                    <button class="download-button" id="downloadBtnNormal" onclick="downloadCSVNormal()" style="display: none;">
+                        📥 Download CSV
+                    </button>
+                </div>
+                <div class="year-filter" id="yearFilter"></div>
+            </div>
+
+            <div class="publications-list" id="publicationsList"></div>
+        </div>
+    </div>
+
+    <script>
+        let allPublications = [];
+        let selectedYear = 'all';
+        let currentSearchType = 'normal';
+
+        function switchTab(tab) {
+            const normalForm = document.getElementById('normalForm');
+            const advancedForm = document.getElementById('advancedForm');
+            const buttons = document.querySelectorAll('.tab-button');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (tab === 'normal') {
+                normalForm.classList.add('active');
+                advancedForm.classList.remove('active');
+                buttons[0].classList.add('active');
+                currentSearchType = 'normal';
+            } else {
+                advancedForm.classList.add('active');
+                normalForm.classList.remove('active');
+                buttons[1].classList.add('active');
+                currentSearchType = 'advanced';
+            }
+
+            document.getElementById('resultsSection').classList.remove('active');
+        }
+
+        async function searchNormal(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('authorName').value;
+            const email = document.getElementById('authorEmail').value;
+
+            showLoading();
+            hideError();
+
+            try {
+                const response = await fetch('/api/v1/publications/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Search failed');
+                }
+
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                showError('Failed to search publications. Please check if the server is running.');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function searchAdvanced(event) {
+            event.preventDefault();
+            
+            const authorId = document.getElementById('authorId').value;
+            const authorName = document.getElementById('advancedAuthorName').value;
+
+            showLoading();
+            hideError();
+
+            try {
+                let url = `/api/v1/publications/search/advanced?author_id=${authorId}`;
+                if (authorName) {
+                    url += `&author_name=${encodeURIComponent(authorName)}`;
+                }
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error('Search failed');
+                }
+
+                const data = await response.json();
+                displayResults(data);
+            } catch (error) {
+                showError('Failed to search publications. Please check if the server is running.');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function displayResults(data) {
+            allPublications = data.publications || [];
+            selectedYear = 'all';
+
+            if (currentSearchType === 'advanced' && data.author_metadata) {
+                displayAuthorInfo(data.author_metadata);
+            } else {
+                document.getElementById('authorInfoSection').innerHTML = '';
+            }
+
+            displayMetrics(data.metrics);
+
+            createYearFilter();
+
+            displayPublications();
+
+            const downloadBtnAdvanced = document.getElementById('downloadBtnAdvanced');
+            const downloadBtnNormal = document.getElementById('downloadBtnNormal');
+            if (currentSearchType === 'advanced') {
+                downloadBtnAdvanced.style.display = 'inline-flex';
+                downloadBtnNormal.style.display = 'none';
+            } else {
+                downloadBtnAdvanced.style.display = 'none';
+                downloadBtnNormal.style.display = 'inline-flex';
+            }
+
+            document.getElementById('resultsSection').classList.add('active');
+        }
+
+        function displayAuthorInfo(metadata) {
+            const authorInfoSection = document.getElementById('authorInfoSection');
+            const interests = metadata.interests || [];
+            const interestsHTML = interests.length > 0 
+                ? `<div class="interests-list">
+                    ${interests.map(interest => `<span class="interest-tag">${interest}</span>`).join('')}
+                   </div>`
+                : '<span class="value">Not specified</span>';
+
+            authorInfoSection.innerHTML = `
+                <div class="author-info-section">
+                    <h2>👤 ${metadata.name || 'Author'}</h2>
+                    <div class="author-details">
+                        <div class="author-detail-item">
+                            <strong>🏛️ Affiliation</strong>
+                            <div class="value">${metadata.affiliation || 'Not specified'}</div>
+                        </div>
+                        <div class="author-detail-item">
+                            <strong>📊 H-Index</strong>
+                            <div class="value">${metadata.h_index || 0}</div>
+                        </div>
+                        <div class="author-detail-item">
+                            <strong>📈 i10-Index</strong>
+                            <div class="value">${metadata.i10_index || 0}</div>
+                        </div>
+                        <div class="author-detail-item">
+                            <strong>📚 Total Citations</strong>
+                            <div class="value">${metadata.total_citations || 0}</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong style="display: block; margin-bottom: 10px;">🎯 Research Interests</strong>
+                        ${interestsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayMetrics(metrics) {
+            const metricsGrid = document.getElementById('metricsGrid');
+            metricsGrid.innerHTML = `
+                <div class="metric-card">
+                    <h3>${allPublications.length}</h3>
+                    <p>Total Publications</p>
+                </div>
+                <div class="metric-card">
+                    <h3>${metrics.total_citations || 0}</h3>
+                    <p>Total Citations</p>
+                </div>
+                <div class="metric-card">
+                    <h3>${metrics.h_index || 0}</h3>
+                    <p>H-Index</p>
+                </div>
+                <div class="metric-card">
+                    <h3>${metrics.i10_index || 0}</h3>
+                    <p>i10-Index</p>
+                </div>
+            `;
+        }
+
+        function createYearFilter() {
+            const years = [...new Set(allPublications.map(pub => pub.year).filter(year => year))].sort((a, b) => b - a);
+            
+            const yearFilter = document.getElementById('yearFilter');
+            yearFilter.innerHTML = `
+                <button class="year-button active" onclick="filterByYear('all')">All Years (${allPublications.length})</button>
+                ${years.map(year => {
+                    const count = allPublications.filter(pub => pub.year === year).length;
+                    return `<button class="year-button" onclick="filterByYear(${year})">${year} (${count})</button>`;
+                }).join('')}
+            `;
+        }
+
+        function filterByYear(year) {
+            selectedYear = year;
+
+            const buttons = document.querySelectorAll('.year-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            displayPublications();
+        }
+
+        function displayPublications() {
+            const publicationsList = document.getElementById('publicationsList');
+            
+            let filtered = allPublications;
+            if (selectedYear !== 'all') {
+                filtered = allPublications.filter(pub => pub.year === selectedYear);
+            }
+
+            if (filtered.length === 0) {
+                publicationsList.innerHTML = `
+                    <div class="no-results">
+                        <h3>No publications found</h3>
+                        <p>Try adjusting your filters or search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.sort((a, b) => {
+                if (b.citations !== a.citations) {
+                    return b.citations - a.citations;
+                }
+                return (b.year || 0) - (a.year || 0);
+            });
+
+            publicationsList.innerHTML = filtered.map(pub => `
+                <div class="publication-card">
+                    <div class="publication-header">
+                        <div class="publication-title">${pub.title || 'Untitled'}</div>
+                        ${pub.year ? `<div class="publication-year">${pub.year}</div>` : ''}
+                    </div>
+                    
+                    ${pub.authors && pub.authors.length > 0 ? `
+                        <div class="publication-meta">
+                            <div class="meta-item">
+                                <strong>Authors:</strong> ${pub.authors.join(', ')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${pub.venue ? `<div class="publication-venue">📖 ${pub.venue}</div>` : ''}
+                    
+                    <div class="publication-meta">
+                        <div class="meta-item">
+                            <strong>📊 Citations:</strong> ${pub.citations || 0}
+                        </div>
+                        ${pub.doi ? `
+                            <div class="meta-item">
+                                <strong>DOI:</strong> ${pub.doi}
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="publication-footer">
+                        <span class="source-badge source-${pub.source.toLowerCase().replace(' ', '-')}">
+                            ${pub.source}
+                        </span>
+                        ${pub.url ? `
+                            <a href="${pub.url}" target="_blank" class="publication-link">
+                                View Publication →
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showLoading() {
+            document.querySelector('.loading').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.querySelector('.loading').classList.remove('active');
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('active');
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').classList.remove('active');
+        }
+
+        function downloadCSV() {
+            if (allPublications.length === 0) {
+                alert('No publications to download');
+                return;
+            }
+
+            const headers = ['Title', 'Year', 'Authors', 'Venue', 'Citations', 'URL', 'Source'];
+            const csvRows = [headers.join(',')];
+
+            let filtered = allPublications;
+            if (selectedYear !== 'all') {
+                filtered = allPublications.filter(pub => pub.year === selectedYear);
+            }
+
+            filtered.sort((a, b) => {
+                if ((b.year || 0) !== (a.year || 0)) {
+                    return (b.year || 0) - (a.year || 0);
+                }
+                return (b.citations || 0) - (a.citations || 0);
+            });
+
+            filtered.forEach(pub => {
+                const row = [
+                    `"${(pub.title || '').replace(/"/g, '""')}"`,
+                    pub.year || '',
+                    `"${(pub.authors || []).join('; ').replace(/"/g, '""')}"`,
+                    `"${(pub.venue || '').replace(/"/g, '""')}"`,
+                    pub.citations || 0,
+                    pub.url || '',
+                    pub.source || ''
+                ];
+                csvRows.push(row.join(','));
+            });
+
+            const csvContent = csvRows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            const timestamp = new Date().toISOString().slice(0, 10);
+            const yearSuffix = selectedYear !== 'all' ? `_${selectedYear}` : '';
+            link.setAttribute('href', url);
+            link.setAttribute('download', `publications${yearSuffix}_${timestamp}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function downloadCSVNormal() {
+            if (allPublications.length === 0) {
+                alert('No publications to download');
+                return;
+            }
+
+            const headers = ['Title', 'Year', 'Authors', 'Venue', 'Citations', 'DOI', 'URL', 'Source'];
+            const csvRows = [headers.join(',')];
+
+            let filtered = allPublications;
+            if (selectedYear !== 'all') {
+                filtered = allPublications.filter(pub => pub.year === selectedYear);
+            }
+
+            filtered.sort((a, b) => {
+                if ((b.year || 0) !== (a.year || 0)) {
+                    return (b.year || 0) - (a.year || 0);
+                }
+                return (b.citations || 0) - (a.citations || 0);
+            });
+
+            filtered.forEach(pub => {
+                const row = [
+                    `"${(pub.title || '').replace(/"/g, '""')}"`,
+                    pub.year || '',
+                    `"${(pub.authors || []).join('; ').replace(/"/g, '""')}"`,
+                    `"${(pub.venue || '').replace(/"/g, '""')}"`,
+                    pub.citations || 0,
+                    pub.doi || '',
+                    pub.url || '',
+                    pub.source || ''
+                ];
+                csvRows.push(row.join(','));
+            });
+
+            // Create blob and download
+            const csvContent = csvRows.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            // Generate filename with timestamp
+            const timestamp = new Date().toISOString().slice(0, 10);
+            const yearSuffix = selectedYear !== 'all' ? `_${selectedYear}` : '';
+            link.setAttribute('href', url);
+            link.setAttribute('download', `publications_normal${yearSuffix}_${timestamp}.csv`);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

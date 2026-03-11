@@ -1,0 +1,172 @@
+2025-11-05 19:33:17,829 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:33:41,667 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-11-05 19:33:41,667 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2025-11-05 19:33:41,668 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using primary API key)
+2025-11-05 19:33:47,108 - GoogleScholarService - INFO - Found 57 publications from Google Scholar for author ID: VUlo65MAAAAJ (using primary key)
+2025-11-05 19:33:47,109 - app.services.aggregator - INFO - Advanced search complete: 57 publications from Google Scholar
+2025-11-05 19:34:44,204 - app.main - INFO - Application shutdown complete
+2025-11-05 19:41:52,326 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:42:07,525 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-11-05 19:42:07,526 - app.api.v1.endpoints.publications - ERROR - Advanced search failed for author ID VUlo65MAAAAJ: Crossref.__init__() got an unexpected keyword argument 'timeout'
+Traceback (most recent call last):
+  File "C:\Users\User\Desktop\mam\academic-publication-api\app\api\v1\endpoints\publications.py", line 65, in search_by_author_id
+    aggregator = AggregatorService()
+                 ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\mam\academic-publication-api\app\services\aggregator.py", line 24, in __init__
+    'crossref': CrossRefService(),
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\User\Desktop\mam\academic-publication-api\app\services\crossref.py", line 18, in __init__
+    self.cr = Crossref(mailto=settings.CROSSREF_MAILTO, timeout=60)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Crossref.__init__() got an unexpected keyword argument 'timeout'
+2025-11-05 19:44:19,840 - app.main - INFO - Application shutdown complete
+2025-11-05 19:44:20,839 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:44:58,465 - app.main - INFO - Application shutdown complete
+2025-11-05 19:45:34,124 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:45:41,542 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-11-05 19:45:41,543 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2025-11-05 19:45:41,543 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using primary API key)
+2025-11-05 19:45:47,966 - GoogleScholarService - INFO - Found 57 publications from Google Scholar for author ID: VUlo65MAAAAJ (using primary key)
+2025-11-05 19:45:47,967 - app.services.aggregator - INFO - Advanced search complete: 57 publications from Google Scholar
+2025-11-05 19:47:16,261 - app.main - INFO - Application shutdown complete
+2025-11-05 19:47:17,380 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:52:16,617 - app.main - INFO - Application shutdown complete
+2025-11-05 19:52:17,936 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:54:02,661 - app.main - INFO - Application shutdown complete
+2025-11-05 19:54:03,470 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:54:04,359 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:54:27,575 - app.main - INFO - Application shutdown complete
+2025-11-05 19:54:30,786 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-05 19:54:54,838 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-11-05 19:54:54,839 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2025-11-05 19:54:54,839 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using primary API key)
+2025-11-05 19:55:00,734 - GoogleScholarService - INFO - Found 57 publications from Google Scholar for author ID: VUlo65MAAAAJ (using primary key)
+2025-11-05 19:55:00,734 - app.services.aggregator - INFO - Advanced search complete: 57 publications from Google Scholar
+2025-11-05 19:56:41,119 - app.main - INFO - Application shutdown complete
+2025-11-06 15:28:25,235 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-06 15:28:43,447 - app.api.v1.endpoints.publications - INFO - Received search request for: Subhalaxmi Chakraborty
+2025-11-06 15:28:43,448 - app.services.aggregator - INFO - Starting comprehensive search for: Subhalaxmi Chakraborty
+2025-11-06 15:28:48,455 - OpenAlexService - INFO - Found 32 works from OpenAlex for Subhalaxmi Chakraborty
+2025-11-06 15:28:53,815 - CrossRefService - INFO - Found 32 works from CrossRef for Subhalaxmi Chakraborty
+2025-11-06 15:28:53,822 - app.services.aggregator - INFO - Search complete: 32 unique publications from 2 sources
+2025-11-06 15:29:14,747 - app.api.v1.endpoints.publications - INFO - Received search request for: Chiradeep Mukherjee
+2025-11-06 15:29:14,748 - app.services.aggregator - INFO - Starting comprehensive search for: Chiradeep Mukherjee
+2025-11-06 15:29:19,107 - OpenAlexService - INFO - Found 51 works from OpenAlex for Chiradeep Mukherjee
+2025-11-06 15:29:24,668 - CrossRefService - INFO - Found 47 works from CrossRef for Chiradeep Mukherjee
+2025-11-06 15:29:24,693 - app.services.aggregator - INFO - Search complete: 52 unique publications from 2 sources
+2025-11-06 15:30:20,927 - app.main - INFO - Application shutdown complete
+2025-11-06 10:40:44,836 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-06 11:08:43,118 - app.main - INFO - Application shutdown complete
+2025-11-06 11:08:44,435 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-11-06 11:09:27,991 - app.api.v1.endpoints.publications - INFO - Received search request for: Subhalaxmi Chakraborty
+2025-11-06 11:09:27,991 - app.services.aggregator - INFO - Starting comprehensive search for: Subhalaxmi Chakraborty
+2025-11-06 11:09:30,591 - OpenAlexService - INFO - Found 32 works from OpenAlex for Subhalaxmi Chakraborty
+2025-11-06 11:09:32,946 - CrossRefService - INFO - Found 32 works from CrossRef for Subhalaxmi Chakraborty
+2025-11-06 11:09:32,959 - app.services.aggregator - INFO - Search complete: 32 unique publications from 2 sources
+2025-11-06 11:09:42,581 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-11-06 11:09:42,583 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2025-11-06 11:09:42,583 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using primary API key)
+2025-11-06 11:09:47,920 - GoogleScholarService - INFO - Found 57 publications from Google Scholar for author ID: VUlo65MAAAAJ (using primary key)
+2025-11-06 11:09:47,920 - app.services.aggregator - INFO - Advanced search complete: 57 publications from Google Scholar
+2025-11-06 11:12:59,465 - app.api.v1.endpoints.publications - INFO - Received search request for: Chiradeep Mukherjee
+2025-11-06 11:12:59,465 - app.services.aggregator - INFO - Starting comprehensive search for: Chiradeep Mukherjee
+2025-11-06 11:13:02,029 - OpenAlexService - INFO - Found 51 works from OpenAlex for Chiradeep Mukherjee
+2025-11-06 11:13:03,157 - CrossRefService - INFO - Found 47 works from CrossRef for Chiradeep Mukherjee
+2025-11-06 11:13:03,187 - app.services.aggregator - INFO - Search complete: 52 unique publications from 2 sources
+2025-11-06 11:29:01,537 - app.api.v1.endpoints.publications - INFO - Received search request for: Subhalaxmi Chakraborty
+2025-11-06 11:29:01,537 - app.services.aggregator - INFO - Starting comprehensive search for: Subhalaxmi Chakraborty
+2025-11-06 11:29:03,409 - OpenAlexService - INFO - Found 32 works from OpenAlex for Subhalaxmi Chakraborty
+2025-11-06 11:29:07,110 - CrossRefService - INFO - Found 32 works from CrossRef for Subhalaxmi Chakraborty
+2025-11-06 11:29:07,123 - app.services.aggregator - INFO - Search complete: 32 unique publications from 2 sources
+2025-12-08 09:10:48,690 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-08 09:16:22,375 - app.main - INFO - Application shutdown complete
+2025-12-08 09:24:59,739 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-08 09:30:20,668 - app.main - INFO - Application shutdown complete
+2025-12-08 09:32:58,030 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-09 03:56:21,376 - app.main - INFO - Application shutdown complete
+2025-12-09 04:00:23,516 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-12 09:49:05,615 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-12 09:55:14,138 - app.main - INFO - Application shutdown complete
+2025-12-12 09:55:15,123 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-12 10:03:25,154 - app.api.v1.endpoints.publications - INFO - Received search request for: Subhalaxmi Chakraborty
+2025-12-12 10:03:25,155 - app.services.aggregator - INFO - Starting comprehensive search for: Subhalaxmi Chakraborty
+2025-12-12 10:03:27,536 - OpenAlexService - INFO - Found 32 works from OpenAlex for Subhalaxmi Chakraborty
+2025-12-12 10:03:31,785 - CrossRefService - INFO - Found 32 works from CrossRef for Subhalaxmi Chakraborty
+2025-12-12 10:03:31,797 - app.services.aggregator - INFO - Search complete: 32 unique publications from 2 sources
+2025-12-12 10:03:41,999 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-12-12 10:03:41,999 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2025-12-12 10:03:41,999 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using primary API key)
+2025-12-12 10:04:12,219 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using backup API key)
+2025-12-12 10:04:42,430 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using backup2 API key)
+2025-12-12 10:05:02,416 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2025-12-12 10:05:02,417 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2025-12-12 10:05:02,417 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using primary API key)
+2025-12-12 10:05:12,645 - app.services.aggregator - INFO - Advanced search complete: 0 publications from Google Scholar
+2025-12-12 10:05:32,640 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using backup API key)
+2025-12-12 10:06:02,855 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ (using backup2 API key)
+2025-12-12 10:06:33,078 - app.services.aggregator - INFO - Advanced search complete: 0 publications from Google Scholar
+2025-12-12 10:11:31,355 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-18 21:53:31,946 - app.main - INFO - Application shutdown complete
+2025-12-18 21:53:35,281 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-23 11:44:19,580 - app.main - INFO - Application shutdown complete
+2025-12-23 11:49:26,944 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-27 14:42:25,170 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-27 16:02:16,355 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-29 09:52:03,782 - app.main - INFO - Application shutdown complete
+2025-12-29 09:52:07,590 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-29 14:08:49,374 - app.main - INFO - Application shutdown complete
+2025-12-29 14:09:15,379 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-29 23:30:42,348 - app.main - INFO - Application shutdown complete
+2025-12-29 23:39:56,979 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-31 01:00:20,976 - app.main - INFO - Application shutdown complete
+2025-12-31 04:26:47,299 - app.main - INFO - Starting Academic Publication API v1.0.0
+2025-12-31 12:33:08,341 - app.main - INFO - Application shutdown complete
+                                                                                     2025-12-31 12:38:08,915 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-01 03:43:03,930 - app.main - INFO - Application shutdown complete
+2026-01-01 03:43:07,786 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-01 05:29:12,744 - app.main - INFO - Application shutdown complete
+2026-01-01 05:29:17,935 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-01 13:35:33,024 - app.main - INFO - Application shutdown complete
+2026-01-01 13:35:36,457 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-01 16:47:48,683 - app.main - INFO - Application shutdown complete
+2026-01-01 16:47:53,617 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-01 19:03:43,955 - app.main - INFO - Application shutdown complete
+2026-01-01 19:03:47,738 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-01 19:54:46,512 - app.main - INFO - Application shutdown complete
+2026-01-01 19:54:51,104 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 02:16:16,597 - app.main - INFO - Application shutdown complete
+2026-01-02 02:16:20,850 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 14:10:03,005 - app.main - INFO - Application shutdown complete
+2026-01-02 14:10:13,761 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 14:19:29,023 - app.main - INFO - Application shutdown complete
+2026-01-02 14:19:31,385 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 16:22:30,194 - app.main - INFO - Application shutdown complete
+2026-01-02 16:22:33,702 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 16:51:08,515 - app.main - INFO - Application shutdown complete
+2026-01-02 16:51:12,234 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 17:15:08,446 - app.main - INFO - Application shutdown complete
+2026-01-02 17:15:13,237 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 17:15:23,081 - app.main - INFO - Application shutdown complete
+2026-01-02 17:16:37,820 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 17:17:07,160 - app.main - INFO - Application shutdown complete
+2026-01-02 17:33:11,728 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02 17:43:45,504 - app.main - INFO - Application shutdown complete
+2026-03-09 20:00:17,957 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-03-09 20:02:19,550 - app.main - INFO - Application shutdown complete
+2026-03-09 20:02:19,926 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-03-09 20:02:42,127 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-03-09 20:02:42,129 - app.main - INFO - Application shutdown complete
+2026-03-09 20:02:45,231 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-03-09 20:02:45,232 - app.main - INFO - Application shutdown complete
+2026-03-09 20:04:12,964 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-03-09 20:04:28,740 - app.api.v1.endpoints.publications - INFO - Received search request for: Subhalaxmi Chakraborty
+2026-03-09 20:04:28,740 - app.services.aggregator - INFO - Starting comprehensive search for: Subhalaxmi Chakraborty
+2026-03-09 20:04:32,901 - OpenAlexService - INFO - Found 36 works from OpenAlex for Subhalaxmi Chakraborty
+2026-03-09 20:04:33,338 - CrossRefService - INFO - Found 36 works from CrossRef for Subhalaxmi Chakraborty
+2026-03-09 20:04:33,345 - app.services.aggregator - INFO - Search complete: 36 unique publications from 2 sources
+2026-03-09 20:04:58,848 - app.api.v1.endpoints.publications - INFO - Received advanced search request for author ID: VUlo65MAAAAJ
+2026-03-09 20:04:58,848 - app.services.aggregator - INFO - Advanced search for author ID: VUlo65MAAAAJ
+2026-03-09 20:04:58,849 - GoogleScholarService - INFO - Fetching Google Scholar data for author ID: VUlo65MAAAAJ via SerpAPI (primary key)
+2026-03-09 20:05:12,102 - GoogleScholarService - INFO - Found 60 publications from Google Scholar for author ID: VUlo65MAAAAJ (primary key)
+2026-03-09 20:05:12,102 - app.services.aggregator - INFO - Advanced search complete: 60 publications from Google Scholar
+2026-03-09 20:09:44,576 - app.main - INFO - Application shutdown complete

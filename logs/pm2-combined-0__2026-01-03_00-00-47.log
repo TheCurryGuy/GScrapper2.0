@@ -1,0 +1,62 @@
+2026-01-02T14:19:31: INFO:     Started server process [30195]
+2026-01-02T14:19:31: INFO:     Waiting for application startup.
+2026-01-02T14:19:31: INFO:     Application startup complete.
+2026-01-02T14:19:31: 2026-01-02 14:19:31,385 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02T14:19:31: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-01-02T15:02:10: INFO:     198.235.24.45:0 - "GET / HTTP/1.1" 200 OK
+2026-01-02T15:58:24: INFO:     74.7.244.15:0 - "GET /robots.txt HTTP/1.1" 404 Not Found
+2026-01-02T16:22:30: INFO:     Shutting down
+2026-01-02T16:22:30: INFO:     Waiting for application shutdown.
+2026-01-02T16:22:30: 2026-01-02 16:22:30,194 - app.main - INFO - Application shutdown complete
+2026-01-02T16:22:30: INFO:     Application shutdown complete.
+2026-01-02T16:22:30: INFO:     Finished server process [30195]
+2026-01-02T16:22:33: INFO:     Started server process [31208]
+2026-01-02T16:22:33: INFO:     Waiting for application startup.
+2026-01-02T16:22:33: INFO:     Application startup complete.
+2026-01-02T16:22:33: 2026-01-02 16:22:33,702 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02T16:22:33: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-01-02T16:51:08: INFO:     Shutting down
+2026-01-02T16:51:08: INFO:     Waiting for application shutdown.
+2026-01-02T16:51:08: 2026-01-02 16:51:08,515 - app.main - INFO - Application shutdown complete
+2026-01-02T16:51:08: INFO:     Application shutdown complete.
+2026-01-02T16:51:08: INFO:     Finished server process [31208]
+2026-01-02T16:51:12: INFO:     Started server process [31584]
+2026-01-02T16:51:12: INFO:     Waiting for application startup.
+2026-01-02T16:51:12: INFO:     Application startup complete.
+2026-01-02T16:51:12: 2026-01-02 16:51:12,234 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02T16:51:12: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-01-02T17:15:08: INFO:     Shutting down
+2026-01-02T17:15:08: INFO:     Waiting for application shutdown.
+2026-01-02T17:15:08: INFO:     Application shutdown complete.
+2026-01-02T17:15:08: INFO:     Finished server process [31584]
+2026-01-02T17:15:08: 2026-01-02 17:15:08,446 - app.main - INFO - Application shutdown complete
+2026-01-02T17:15:13: INFO:     Started server process [32580]
+2026-01-02T17:15:13: INFO:     Waiting for application startup.
+2026-01-02T17:15:13: INFO:     Application startup complete.
+2026-01-02T17:15:13: 2026-01-02 17:15:13,237 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02T17:15:13: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-01-02T17:15:22: INFO:     Shutting down
+2026-01-02T17:15:23: INFO:     Waiting for application shutdown.
+2026-01-02T17:15:23: INFO:     Application shutdown complete.
+2026-01-02T17:15:23: INFO:     Finished server process [32580]
+2026-01-02T17:15:23: 2026-01-02 17:15:23,081 - app.main - INFO - Application shutdown complete
+2026-01-02T17:16:37: INFO:     Started server process [834]
+2026-01-02T17:16:37: INFO:     Waiting for application startup.
+2026-01-02T17:16:37: 2026-01-02 17:16:37,820 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02T17:16:37: INFO:     Application startup complete.
+2026-01-02T17:16:37: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-01-02T17:17:07: INFO:     Shutting down
+2026-01-02T17:17:07: INFO:     Waiting for application shutdown.
+2026-01-02T17:17:07: INFO:     Application shutdown complete.
+2026-01-02T17:17:07: INFO:     Finished server process [834]
+2026-01-02T17:17:07: 2026-01-02 17:17:07,160 - app.main - INFO - Application shutdown complete
+2026-01-02T17:33:11: INFO:     Started server process [2294]
+2026-01-02T17:33:11: INFO:     Waiting for application startup.
+2026-01-02T17:33:11: 2026-01-02 17:33:11,728 - app.main - INFO - Starting Academic Publication API v1.0.0
+2026-01-02T17:33:11: INFO:     Application startup complete.
+2026-01-02T17:33:11: INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2026-01-02T17:43:45: INFO:     Shutting down
+2026-01-02T17:43:45: INFO:     Waiting for application shutdown.
+2026-01-02T17:43:45: INFO:     Application shutdown complete.
+2026-01-02T17:43:45: INFO:     Finished server process [2294]
+2026-01-02T17:43:45: 2026-01-02 17:43:45,504 - app.main - INFO - Application shutdown complete
